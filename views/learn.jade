@@ -1,0 +1,38 @@
+extends layout
+block content
+      .container.learnText
+        .row
+          .col-md-8
+            h3.learnTitle Learning text
+            p.learnContent what you need to know
+          .col-md-4
+            h3.checkpointQ Checkpoint Question
+            p.learnQuestion question
+            .checkAns
+              .learnAnswer
+              button.btn.btn-primary.checkButton(type='button') Check Answer
+              .feedback
+      .container
+        .row.navButtons
+          .col-md-6
+            button.btn.btn-lg.btn-primary.prevButton(type='button', disabled='disabled') Previous
+          .col-md-6
+            button.btn.btn-lg.btn-primary.nextButton(type='button', disabled='disabled') Next
+      footer
+         p Created by Rachel Philip
+      //Include a script here that uses the value of the user's last answered question to set that on the window
+      script(type="text/javascript").
+        window.lastQAnswered = "!{lastQAnswered}";
+      
+      script(src='javascripts/functions.js')
+      script(src='setCheckpoint/setDefinition.js')
+      script(src='setCheckpoint/subsets.js')
+      script(src='setCheckpoint/emptyAndUniversalSets.js')
+      script(src='setCheckpoint/unionIntersection.js')
+      script(src='setCheckpoint/complementAndSetDifference.js')
+      script(src='setCheckpoint/deMorganLaws.js')
+      script(src='setCheckpoint/algebraOfSets.js')
+      script(src='setCheckpoint/countingPrinciple.js')
+      script(src='setCheckpoint/powerSets.js')
+      script(src='javascripts/learnSets.js')
+    

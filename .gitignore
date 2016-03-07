@@ -1,0 +1,5 @@
+.DS_Store
+DiscreteCTF
+node_modules
+bin
+config

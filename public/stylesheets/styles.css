@@ -1,0 +1,159 @@
+/* GENERAL ******************************/
+body {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav a:link, a:visited {
+    color: lightcyan;
+}
+
+nav a:hover, a:active {
+    color: white;
+}
+
+img {
+    max-width: 200px;
+}
+
+header {
+    background: #bce7e5; 
+    margin: 0 0 30px 0;
+    padding: 3px 0 0 0;
+    width: 100%;
+    
+}
+
+h1 {
+    color: #105955;
+}
+
+.noNav {
+    border-color: lightseagreen;
+    border-style: solid;
+    border-width: 0 0 15px 0;
+}
+
+.longPara {
+  margin: 0 20%;
+  font-size: 1.2em;
+}
+
+footer {
+    
+    background: lightseagreen;
+    width: 100%;
+    color: lightcyan;
+    position: fixed;
+    bottom: 0;
+    margin-top: 20px;
+    padding-top: -5px;
+}
+
+#darkLink {
+    color: lightseagreen;
+}
+
+/* NAVIGATION BAR ****************************/
+
+nav {
+    padding: 0 0;
+    margin: 0 0 0;
+    background: lightseagreen;
+}
+
+nav ul{
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    padding: 0 30px 0 0;
+}
+
+nav a {
+    padding: 15px 10px;
+}
+
+.selected {
+    background-color: #136a66;
+}
+
+/*INDEX *************************************/
+.logIn,
+.signUp {
+    text-align: center;
+}
+
+.subtitle {
+    font-family: 'Lobster', Cursive, Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+}
+
+
+.welcome {
+    text-align: center;
+    margin: 10px;
+    padding: 0 2%;
+}
+
+.wrap {
+    min-height: calc(100vh - 20px);
+    padding: 0 0 60px;
+}
+
+/* DASHBOARD *****************************************/
+.dash {
+    text-align: center;
+}
+.dash h2 {
+    margin-bottom: 20px;
+}
+
+/* LEARN *********************************************/
+
+.nextButton {
+    float: right;
+}
+
+.learnText {
+    font-size: 1.25em;
+    padding-bottom: 20px;
+}
+
+.learnContent {
+    padding-right: 80px;
+    white-space: pre-line; 
+}
+
+.learnTitle,
+.checkpointQ,
+.hints {
+    text-decoration: underline;
+}
+
+.learnAnswer {
+    margin: 20px 0px;
+}
+
+.checkButton {
+    margin-top: 10px;
+}
+
+.multTextAns input{
+    width: 30px;
+    
+}
+.multTextAns, {
+    display: inline;
+    margin: 5px 0 0 0;
+}
+
+.checkboxAns input, 
+radioAns input {
+    margin-right: 10px;
+}
