@@ -14,7 +14,7 @@
             set = generateSet(),
             question = "Match the numbered algebra rule names with the formulas: <br>1. Identity Law<br>2. Complement Law<br>3. Associative Law<br>4. Distributive Law<br>5. Commutative Law<br>",
             answer = set.answer,
-            answerType = answerOptions + complement2 + "<br>" + answerOptions + commutativeIntersection + "<br>" + answerOptions + associative1 + "<br>" + answerOptions + identity1 + "<br>" + answerOptions + distributive2;
+            answerType = "<div>" + answerOptions + complement2 + "<br>" + answerOptions + commutativeIntersection + "<br>" + answerOptions + associative1 + "<br>" + answerOptions + identity1 + "<br>" + answerOptions + distributive2 + "</div>";
         return {
             title: title,
             text: text,

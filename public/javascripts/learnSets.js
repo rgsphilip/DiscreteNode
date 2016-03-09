@@ -12,14 +12,7 @@ var topics = [
     'countingPrinciple'
 ]
 
-var nextTopicIx = function(lastTopic) {
-    //returns the next topic index
-    if (lastTopic === "") {
-        return 0;
-    } else {
-        return ($.inArray(lastTopic, topics) + 1);
-    }
-}
+
 
 var data = {
     setDefinition: setDefinition.questionAndAnswer(),
@@ -33,7 +26,17 @@ var data = {
     countingPrinciple: countingPrinciple.questionAndAnswer()
 }
 
-// TODO: Check the value of window.lastQAnswered and use that to initialize topicIndex
+
+
+var nextTopicIx = function(lastTopic) {
+    //returns the next topic index
+    if (lastTopic === "") {
+        return 0;
+    } else {
+        return ($.inArray(lastTopic, topics) + 1);
+    }
+}
+
 var lastQ = window.lastQAnswered;
 var topicIndex = nextTopicIx(lastQ);
 var len = topics.length - 1;
@@ -44,16 +47,24 @@ function setContent(ix) {
     $('.learnAnswer').replaceWith($(data[topics[ix]].answerType).addClass('learnAnswer'));
 }
 
+if(topicIndex === 0) {
+    $('.prevButton').attr("disabled", "disabled");
+}
+
+if($.inArray(lastQ, topics) < topicIndex) {
+    $('.nextButton').removeAttr("disabled");
+}
+
 setContent(topicIndex);
 
 $('.nextButton').click(function() {
     if(topicIndex < len)
     {
-        $(this).attr("disabled", "disabled");
+        //$(this).attr("disabled", "disabled");
         topicIndex +=1;
         setContent(topicIndex);
         $('.feedback').text(""); //needed to set feedback to the empty string
-        if (topicIndex === len) {
+        if ($.inArray(lastQ, topics) < topicIndex) {
             $(this).attr("disabled", "disabled");
         }
         if(topicIndex === 1) {
@@ -68,7 +79,7 @@ $('.prevButton').click(function() {
         topicIndex -=1;
         setContent(topicIndex);
         $('.feedback').text("");
-        //$('.nextButton').removeAttr("disabled");
+        $('.nextButton').removeAttr("disabled");
         if (topicIndex === 0) {
             $(this).attr("disabled", "disabled");   
         }
@@ -80,14 +91,15 @@ function goodJob() {
     $('.feedback').text("Great job, keep on going!");
     $('.nextButton').removeAttr("disabled");
     
-    //if (topicIndex > )
-    $.ajax({
-        method: "PUT",
-        url: "/profile/123",
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({lastQAnswered: topics[topicIndex]}),
-    });
-    console.log(window.lastQAnswered);
+    if (topicIndex > $.inArray(lastQ, topics)) {
+        $.ajax({
+            method: "PUT",
+            url: "/profile/123",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({lastQAnswered: topics[topicIndex]}),
+        });
+        console.log(window.lastQAnswered);
+    }
 }
 function tryAgain() {
     $('.feedback').text("Try again");
@@ -102,7 +114,8 @@ function transformUserInput(answerString) {
 
 //ANSWER VALIDATION FUNCTION
 $('.checkButton').click(function(){
-    //There are 3 main types of questions to check: text answers, checkboxes, or radio buttons. This checks for which one, then handles checking the answer for correctness.
+    //There are 4 main types of questions to check: text answers, answerOptions (multiple textboxes), 
+    //checkboxes, or radio buttons. This checks for which one, then handles checking the answer for correctness.
     if($('.checkAns form').hasClass("textAns")) {
         //if it's a text answer box:
         var $answer = $('.textAns input').val();
