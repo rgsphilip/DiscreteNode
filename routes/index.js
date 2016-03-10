@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
     app.get('/learn', isLoggedIn, function(req, res, next) {
         res.render('learn', { 
             user: req.user,
-            lastQAnswered: req.user.progress.lastQAnswered
+            lastQAnswered: req.user.modules.sets.lastQAnswered
         });
     });
 

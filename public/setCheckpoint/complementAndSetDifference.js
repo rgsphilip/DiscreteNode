@@ -21,7 +21,7 @@
     var questionAndAnswer = function () {
         // Learning text and checkpoint question
         var title = "Set Theory - Complements and Set Difference",
-            text = "The complement of set " + a + ", denoted as " + acomp + " is the set of elements which belong to the universal set " + universal + " and are not contained in " + a + ". For example, if " + universal + setU + " and " + setA + ", then  " + acompSet + ".\n\nThe set difference between " + a +" and " + b + ", denoted as " + aMinusB + ", is the set of all elements that are contained in " + a + " but are not in " + b + ". If " + setA + " and " + setB + ", then " + aMinusBSet+ ".  " + three + " and " + four + " are excluded since they are in " + b + ". \n\nThe symmetric difference between " + a +" and " + b + ", denoted as " + aSymDiffB + ", is the set of elements that are contained in " + a + " and in " + b + ", but not both. Said another way, it is the union of " + a + " and " + b + " minus their intersection. Using the same sets as above, " + aSymDiffBSet + ".",
+            text = "The complement of set " + a + ", denoted as " + acomp + " is the set of elements which belong to the universal set " + universal + " and are not contained in " + a + ". For example, if " + universal + setU + " and " + setAstr + ", then  " + acompSet + ".\n\nThe set difference between " + a +" and " + b + ", denoted as " + aMinusB + ", is the set of all elements that are contained in " + a + " but are not in " + b + ". If " + setAstr + " and " + setB + ", then " + aMinusBSet+ ".  " + three + " and " + four + " are excluded since they are in " + b + ". \n\nThe symmetric difference between " + a +" and " + b + ", denoted as " + aSymDiffB + ", is the set of elements that are contained in " + a + " and in " + b + ", but not both. Said another way, it is the union of " + a + " and " + b + " minus their intersection. Using the same sets as above, " + aSymDiffBSet + ".",
             set = generateSet(),
             question = "Let " + universal + " be " + set.universe + ", " + aEq + set.setA + ", and " + bEq + set.setB + ". What elements are within " + aSymDiffBComp + "? \n(hint: drawing out the sets will help with this one!)",
             answerType = answerBox,
@@ -43,7 +43,7 @@
     var b = katex.renderToString("B");
     var aEq = katex.renderToString("A = ");
     var bEq = katex.renderToString("B = ");
-    var setA = katex.renderToString("A = \\{1, 2, 3, 4\\}");
+    var setAstr = katex.renderToString("A = \\{1, 2, 3, 4\\}");
     var setB = katex.renderToString("B = \\{3, 4, 5, 6\\}");
     var setU = katex.renderToString(" = \\{1, 2, 3, 4, 5, 6, 7, 8\\}");
     var three = katex.renderToString("3");

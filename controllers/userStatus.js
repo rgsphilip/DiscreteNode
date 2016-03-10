@@ -5,7 +5,8 @@ exports.updateStatus = function(req, res) {
     var userId = req.user._id;
     var user = req.user;
     var lastQAnswered = req.body.lastQAnswered;
-    user.progress.lastQAnswered = lastQAnswered;
+    user.modules[req.body.module].lastQAnswered = lastQAnswered;
+    user.modules[req.body.module].status = req.body.status;
 
     User.update({"_id":userId}, user,
         function (err, numberAffected) {

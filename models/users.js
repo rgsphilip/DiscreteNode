@@ -19,10 +19,12 @@ var userSchema = mongoose.Schema({
         name         : String
     },
     
-    progress        : {
-        lastQAnswered : String
+    modules       : {       
+        sets: {
+            lastQAnswered : String,
+            status: String
+        }
     }
-
 });
 
 // create the model for users and expose it to our app

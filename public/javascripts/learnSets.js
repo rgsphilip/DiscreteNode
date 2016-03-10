@@ -51,7 +51,7 @@ if(topicIndex === 0) {
     $('.prevButton').attr("disabled", "disabled");
 }
 
-if($.inArray(lastQ, topics) < topicIndex) {
+if($.inArray(lastQ, topics) < (topicIndex -1)) {
     $('.nextButton').removeAttr("disabled");
 }
 
@@ -96,10 +96,18 @@ function goodJob() {
             method: "PUT",
             url: "/profile/123",
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({lastQAnswered: topics[topicIndex]}),
+            data: JSON.stringify({module: 'sets', lastQAnswered: topics[topicIndex]}),
         });
-        console.log(window.lastQAnswered);
     }
+    if (topicIndex === (topics.length - 1)) {
+        $.ajax({
+            method: "PUT",
+            url: "/profile/123",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({module: 'sets', status: 'challenge'}),
+        });
+    }
+    
 }
 function tryAgain() {
     $('.feedback').text("Try again");

@@ -23,7 +23,7 @@
         return {
             title: title,
             question: question,
-            answerType: answerOptions + set.ansArray[0] + "<br>" + answerOptions + set.ansArray[1] + "<br>" + answerOptions + set.ansArray[2] + "<br>" + answerOptions + set.ansArray[3] + "<br>" + answerOptions + set.ansArray[4] + "<br>",
+            answerType: "<div>" + answerOptions + set.ansArray[0] + "<br>" + answerOptions + set.ansArray[1] + "<br>" + answerOptions + set.ansArray[2] + "<br>" + answerOptions + set.ansArray[3] + "<br>" + answerOptions + set.ansArray[4] + "<br>" + "</div>",
             answer: set.answer,
         }     
     }

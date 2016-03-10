@@ -2,20 +2,32 @@ var topics = [
     'subsets1',
     'subsets2',
     'subsets3',
-    //'setOperators1',
-    //'setOperators2'
+    'setOperators1',
+    'setOperators2',
+    'setOperators3',
+    'setOperators4',
+    'powerSets1'
 ]
-
-var topicArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 var data = {
     subsets1: subsets1.questionAndAnswer(),
     subsets2: subsets2.questionAndAnswer(),
     subsets3: subsets3.questionAndAnswer(),
-    //setOperators1: setOperators1.questionAndAnswer(),
-    //setOperators2: setOperators2.questionAndAnswer()
+    setOperators1: setOperators1.questionAndAnswer(),
+    setOperators2: setOperators2.questionAndAnswer(),
+    setOperators3: setOperators3.questionAndAnswer(),
+    setOperators4: setOperators4.questionAndAnswer(),
+    powerSets1: powerSets1.questionAndAnswer()
 }
 
+var nextTopicIx = function(lastTopic) {
+    //returns the next topic index
+    if (lastTopic === "") {
+        return 0;
+    } else {
+        return ($.inArray(lastTopic, topics) + 1);
+    }
+}
 var topicIndex = 0;
 var len = topics.length - 1;
 function setContent(ix) {
@@ -40,16 +52,25 @@ $('.nextQuestion').click(function() {
 });
 
 // SUPPORTING FUNCTIONS FOR ANSWER VALIDATION
-function goodJob() {
+var goodJob = function() {
     $('.feedback').text("Great job, keep on going!");
     $('.nextQuestion').removeAttr("disabled");
-    //need to add in something about the array here
+    
+    // if (topicIndex > $.inArray(lastQ, topics)) {
+    //     $.ajax({
+    //         method: "PUT",
+    //         url: "/profile/123",
+    //         contentType: 'application/json; charset=utf-8',
+    //         data: JSON.stringify({lastQAnswered: topics[topicIndex]}),
+    //     });
+    //     console.log(window.lastQAnswered);
 }
-function tryAgain() {
+
+var tryAgain = function() {
     $('.feedback').text("Try again");
-    //need to add in something about the array here
 }
-function transformUserInput(answerString) {
+
+var transformUserInput = function(answerString) {
     var result = answerString.split(/[\s,]+/);
     if(result === -1) { //i.e., there are no spaces or commas
         result = [answerString];
@@ -59,8 +80,8 @@ function transformUserInput(answerString) {
 
 //ANSWER VALIDATION FUNCTION
 $('.checkButton').click(function(){
-    //There are 3 main types of questions to check: text answers, checkboxes, or radio buttons. This checks for which one, then handles checking the answer for correctness.
-    //$('.checkButton').attr("disabled", "disabled")
+    //There are 4 main types of questions to check: text answers, answerOptions (multiple textboxes), 
+    //checkboxes, or radio buttons. This checks for which one, then handles checking the answer for correctness.
     if($('.checkAns form').hasClass("textAns")) {
         //if it's a text answer box:
         var $answer = $('.textAns input').val();
@@ -68,6 +89,7 @@ $('.checkButton').click(function(){
         var correctAnswer = _.uniq(data[topics[topicIndex]].answer);
         if(userAnswerArray.length !== correctAnswer.length) {
             return tryAgain();
+            console.log("answer: " + userAnswerArray.length + " correct: " + correctAnswer.length);
         }
         var len = correctAnswer.length;
         for(var i = 0; i < len; i++) {
