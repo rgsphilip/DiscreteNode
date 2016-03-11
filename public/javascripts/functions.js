@@ -108,22 +108,6 @@ var setArrayPrint = function(array) {
     return result;
 }
 
-// var isASubsetof = function(array1, subArray1) {
-//     var array = _.uniq(array1);
-//     var subArray = _.uniq(subArray1);
-//     var subLen = subArray.length;
-//     if (array.length < subLen) {
-//         return false;
-//     }
-//     for(var i = 0; i < subLen; i++) {
-//         if (subArray[i], userAnswerArray) === -1) {
-//                 return false;   
-//             }
-//     }
-//     return true;
-// }
-
-
 var setRemoveElem = function(arrayInput, numRemove) {
     var array = _.clone(arrayInput);
     //removes numRemove number of elements from array
@@ -189,41 +173,3 @@ var symetricDifference = function(arrayA, arrayB) {
     var intersection = setIntersection(arrayA, arrayB)
     return removeSubset(union, intersection);
 }
-
-//var setDifference = set
-
-var setAddNewElem = function(array, numAdd) {
-    //adds numAdd number of elements to array.
-    //elements added were not previously in the array
-    
-        
-}
-
-
-
-//TESTS 
-/*
-var x = setGenerate(5, 5);
-//console.log(x);
-//console.log(setPrint(x));
-setRemoveElem(x, 2);
-//console.log(setPrint(x));
-
-var y = setGenerate(5, 7);
-// console.log(y);
-// console.log(setPrint(y));
-setRemoveElem(y, 3);
-//console.log(setPrint(y));
-
-//var z = setGenerate(5, 4);
-
-
-var a = setGenerate(5,7);
-//console.log(setPrint(a));
-var b = setRemoveDups(a);
-//console.log(setPrint(b));
-
-var setArraytest = [x, y, a, b];
-console.log(setArrayPrint(setArraytest));
-
-*/

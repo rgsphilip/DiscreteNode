@@ -12,7 +12,7 @@
             setA : katex.renderToString("n(A) = ") + " " + aPrint,
             setB : katex.renderToString("n(B) = ") + " " + bPrint,
             setAUB : katex.renderToString("n(A \\cap B) = ") + aIntBPrint,
-            answer : answer
+            answer : [answer]
         }
     }
 

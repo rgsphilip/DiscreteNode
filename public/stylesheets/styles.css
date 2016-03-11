@@ -157,3 +157,9 @@ nav a {
 radioAns input {
     margin-right: 10px;
 }
+
+/* PROFILE */
+.badges {
+    display: inline;
+    max-width: 30px;   
+}

@@ -1,5 +1,3 @@
-// app/models/user.js
-// load the things we need
 var mongoose = require('mongoose');
 
 // define the schema for our user model
@@ -20,9 +18,17 @@ var userSchema = mongoose.Schema({
     },
     
     modules       : {       
-        sets: {
+        learnSets: {
             lastQAnswered : String,
-            status: String
+            count : Number,
+            total : Number,
+            completed: String
+        },
+        challengeSets: {
+            lastQAnswered : String,
+            count : Number,
+            total : Number, 
+            completed : String  
         }
     }
 });

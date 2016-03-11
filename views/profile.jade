@@ -5,11 +5,20 @@ block content
         h1
           span.fa.fa-anchor
           |  Progress
-      .row
-        // GOOGLE INFORMATION
-        .col-sm-6
+      h3 Learning Sets: 
+        if user.modules.learnSets.completed
+          img.badges(src='images/check.jpg')    
+      .progress
+        
+        .progress-bar(role='progressbar', aria-valuenow='#{percentLearnSets}', aria-valuemin='0', aria-valuemax='100', style='width: #{percentLearnSets}%;')
+            | #{percentLearnSets}%
+      h3 Sets - Challenge Mode: 
+        if user.modules.challengeSets.completed
+          img.badges(src='images/check.jpg')     
+      .progress
+        
+        .progress-bar(role='progressbar', aria-valuenow='#{percentChallengeSets}', aria-valuemin='0', aria-valuemax='100', style='width: #{percentChallengeSets}%;')
+            | #{percentChallengeSets}%
             
-
-
     footer
       p Created by Rachel Philip

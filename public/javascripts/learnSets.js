@@ -12,8 +12,6 @@ var topics = [
     'countingPrinciple'
 ]
 
-
-
 var data = {
     setDefinition: setDefinition.questionAndAnswer(),
     subsets: subsets.questionAndAnswer(),
@@ -26,12 +24,12 @@ var data = {
     countingPrinciple: countingPrinciple.questionAndAnswer()
 }
 
-
-
 var nextTopicIx = function(lastTopic) {
     //returns the next topic index
     if (lastTopic === "") {
         return 0;
+    } else if (lastTopic === "countingPrinciple"){
+        return ($.inArray(lastTopic, topics));
     } else {
         return ($.inArray(lastTopic, topics) + 1);
     }
@@ -63,7 +61,7 @@ $('.nextButton').click(function() {
         //$(this).attr("disabled", "disabled");
         topicIndex +=1;
         setContent(topicIndex);
-        $('.feedback').text(""); //needed to set feedback to the empty string
+        $('.feedback').text(" "); //needed to set feedback to the empty string
         if ($.inArray(lastQ, topics) < topicIndex) {
             $(this).attr("disabled", "disabled");
         }
@@ -78,7 +76,7 @@ $('.prevButton').click(function() {
     if (topicIndex > 0) {
         topicIndex -=1;
         setContent(topicIndex);
-        $('.feedback').text("");
+        $('.feedback').text(" ");
         $('.nextButton').removeAttr("disabled");
         if (topicIndex === 0) {
             $(this).attr("disabled", "disabled");   
@@ -96,7 +94,7 @@ function goodJob() {
             method: "PUT",
             url: "/profile/123",
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({module: 'sets', lastQAnswered: topics[topicIndex]}),
+            data: JSON.stringify({module: 'learnSets', lastQAnswered: topics[topicIndex], count: (topicIndex + 1), total: topics.length}),
         });
     }
     if (topicIndex === (topics.length - 1)) {
@@ -104,7 +102,11 @@ function goodJob() {
             method: "PUT",
             url: "/profile/123",
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({module: 'sets', status: 'challenge'}),
+            data: JSON.stringify({module: 'learnSets', lastQAnswered: topics[topicIndex], completed: 'complete', count: (topicIndex + 1), total: topics.length}),
+        });
+        $('.nextButton').text("Go on to Challenges!");
+        $('.nextButton').click(function(){
+           window.location.href = '/challenge'; 
         });
     }
     

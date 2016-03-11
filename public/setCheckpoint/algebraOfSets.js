@@ -14,7 +14,7 @@
             set = generateSet(),
             question = "Match the numbered algebra rule names with the formulas: <br>1. Identity Law<br>2. Complement Law<br>3. Associative Law<br>4. Distributive Law<br>5. Commutative Law<br>",
             answer = set.answer,
-            answerType = "<div>" + answerOptions + complement2 + "<br>" + answerOptions + commutativeIntersection + "<br>" + answerOptions + associative1 + "<br>" + answerOptions + identity1 + "<br>" + answerOptions + distributive2 + "</div>";
+            answerType = "<div>" + complementOption + "<br>" + commutativeOption + "<br>" + associativeOption + "<br>" + identityOption + "<br>" + distributiveOption + "</div>";
         return {
             title: title,
             text: text,
@@ -37,4 +37,10 @@
      var identity2 = katex.renderToString("A \\cap {\\text{U}} = A");
      var complement1 = katex.renderToString("A \\cap A^{\\mathsf{c}} = {\\text{U}}");
      var complement2 = katex.renderToString("A \\cup A^{\\mathsf{c}} = \\emptyset");
+     
+     var complementOption = $(answerOptions).clone().append($(complement2)).prop('outerHTML');
+     var commutativeOption = $(answerOptions).clone().append($(commutativeIntersection)).prop('outerHTML');
+     var associativeOption = $(answerOptions).clone().append($(associative1)).prop('outerHTML');
+     var identityOption = $(answerOptions).clone().append($(identity1)).prop('outerHTML');
+     var distributiveOption = $(answerOptions).clone().append($(distributive2)).prop('outerHTML');
 })();

@@ -23,7 +23,7 @@
         return {
             title: title,
             question: question,
-            answerType: "<div>" + answerOptions + set.ansArray[0] + "<br>" + answerOptions + set.ansArray[1] + "<br>" + answerOptions + set.ansArray[2] + "<br>" + answerOptions + set.ansArray[3] + "<br>" + answerOptions + set.ansArray[4] + "<br>" + "</div>",
+            answerType: "<div>" + $(answerOptions).clone().append($(set.ansArray[0])).prop('outerHTML') + "<br>" + $(answerOptions).clone().append($(set.ansArray[1])).prop('outerHTML') + "<br>"  + $(answerOptions).clone().append($(set.ansArray[2])).prop('outerHTML') + "<br>"  + $(answerOptions).clone().append($(set.ansArray[3])).prop('outerHTML') + "<br>"  + $(answerOptions).clone().append($(set.ansArray[4])).prop('outerHTML') + "<br>" + "</div>",
             answer: set.answer,
         }     
     }

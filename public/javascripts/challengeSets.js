@@ -6,7 +6,9 @@ var topics = [
     'setOperators2',
     'setOperators3',
     'setOperators4',
-    'powerSets1'
+    'powerSets1',
+    'countingPrinciples1',
+    'countingPrinciples2'
 ]
 
 var data = {
@@ -17,18 +19,24 @@ var data = {
     setOperators2: setOperators2.questionAndAnswer(),
     setOperators3: setOperators3.questionAndAnswer(),
     setOperators4: setOperators4.questionAndAnswer(),
-    powerSets1: powerSets1.questionAndAnswer()
+    powerSets1: powerSets1.questionAndAnswer(),
+    countingPrinciples1: countingPrinciples1.questionAndAnswer(),
+    countingPrinciples2: countingPrinciples2.questionAndAnswer()
 }
 
 var nextTopicIx = function(lastTopic) {
     //returns the next topic index
     if (lastTopic === "") {
         return 0;
+    } else if (lastTopic === "countingPrinciples2"){
+        return ($.inArray(lastTopic, topics));
     } else {
         return ($.inArray(lastTopic, topics) + 1);
     }
 }
-var topicIndex = 0;
+
+var lastQ = window.lastQAnswered;
+var topicIndex = nextTopicIx(lastQ);
 var len = topics.length - 1;
 function setContent(ix) {
     $('.learnTitle').text(data[topics[ix]].title);
@@ -36,34 +44,70 @@ function setContent(ix) {
     $('.learnAnswer').replaceWith($(data[topics[ix]].answerType).addClass('learnAnswer'));
 }
 
+if(topicIndex === 0) {
+    $('.prevButton').attr("disabled", "disabled");
+}
+
+if($.inArray(lastQ, topics) < (topicIndex -1)) {
+    $('.nextQuestion').removeAttr("disabled");
+}
+
 setContent(topicIndex);
 
 $('.nextQuestion').click(function() {
     if(topicIndex < len)
     {
-        $(this).attr("disabled", "disabled");
+        //$(this).attr("disabled", "disabled");
         topicIndex +=1;
         setContent(topicIndex);
-        $('.feedback').text(""); //needed to set feedback to the empty string
-        if (topicIndex === len) {
+        $('.feedback').text(" "); //needed to set feedback to the empty string
+        if ($.inArray(lastQ, topics) < topicIndex) {
             $(this).attr("disabled", "disabled");
+        }
+        if(topicIndex === 1) {
+            $('.prevButton').removeAttr("disabled");
+        }
+    }
+});
+
+$('.prevButton').click(function() {
+    if (topicIndex > 0) {
+        topicIndex -=1;
+        setContent(topicIndex);
+        $('.feedback').text(" ");
+        $('.nextQuestion').removeAttr("disabled");
+        if (topicIndex === 0) {
+            $(this).attr("disabled", "disabled");   
         }
     }
 });
 
 // SUPPORTING FUNCTIONS FOR ANSWER VALIDATION
-var goodJob = function() {
+function goodJob() {
     $('.feedback').text("Great job, keep on going!");
     $('.nextQuestion').removeAttr("disabled");
     
-    // if (topicIndex > $.inArray(lastQ, topics)) {
-    //     $.ajax({
-    //         method: "PUT",
-    //         url: "/profile/123",
-    //         contentType: 'application/json; charset=utf-8',
-    //         data: JSON.stringify({lastQAnswered: topics[topicIndex]}),
-    //     });
-    //     console.log(window.lastQAnswered);
+    if (topicIndex > $.inArray(lastQ, topics)) {
+        $.ajax({
+            method: "PUT",
+            url: "/profile/123",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({module: 'challengeSets', lastQAnswered: topics[topicIndex], count: (topicIndex + 1), total: topics.length}),
+        });
+    }
+    if (topicIndex === (topics.length - 1)) {
+        $.ajax({
+            method: "PUT",
+            url: "/profile/123",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({module: 'challengeSets', lastQAnswered: topics[topicIndex], completed: 'complete', count: (topicIndex + 1), total: topics.length}),
+        });
+        $('.nextQuestion').text("Great Job! See Your Progress");
+        $('.nextQuestion').click(function(){
+           window.location.href = '/profile'; 
+        });
+    }
+    
 }
 
 var tryAgain = function() {
@@ -86,10 +130,13 @@ $('.checkButton').click(function(){
         //if it's a text answer box:
         var $answer = $('.textAns input').val();
         var userAnswerArray = _.uniq(transformUserInput($answer)); //_.uniq removes duplicates
+        console.log("1: " + (data[topics[topicIndex]].answer))
+        console.log("2: " + _.uniq(data[topics[topicIndex]].answer));
         var correctAnswer = _.uniq(data[topics[topicIndex]].answer);
+        
         if(userAnswerArray.length !== correctAnswer.length) {
             return tryAgain();
-            console.log("answer: " + userAnswerArray.length + " correct: " + correctAnswer.length);
+            
         }
         var len = correctAnswer.length;
         for(var i = 0; i < len; i++) {
@@ -112,6 +159,7 @@ $('.checkButton').click(function(){
         }
         var len = correctAnswer.length;
         console.log(userArray);
+        console.log(correctAnswer);
         for(var i = 0; i < len; i++) {
             if (userArray[i] !== correctAnswer[i]) {
                 return tryAgain();   

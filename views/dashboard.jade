@@ -3,9 +3,14 @@ block content
     .container.dash
       .row
         .col-md-6
-          a(href='learn')
-            h2 Continue Your Journey
-            img.center-block(src='images/flag.jpg', alt='Continue')
+          if completed
+            a(href='challenge')
+              h2 Continue Your Journey
+              img.center-block(src='images/flag.jpg', alt='Continue')
+          else
+            a(href='learn')
+              h2 Continue Your Journey
+              img.center-block(src='images/flag.jpg', alt='Continue')
         .col-md-6
           a(href='profile')
             h2 Your Profile and Progress
